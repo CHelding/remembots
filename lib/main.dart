@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:remembots/Reminder.dart';
+import 'package:remembots/ReminderListItem.dart';
 
 void main() {
   runApp(new RemembotApp());
@@ -26,6 +28,13 @@ class LandingPage extends StatefulWidget {
 }
 
 class LandingPageState extends State<LandingPage> {
+  List<Reminder> reminders = new List();
+
+  void addReminder() {
+    setState(() {
+      reminders.add(new Reminder("Gmail", "Respond to email", new DateTime.now()));
+    });
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -34,16 +43,19 @@ class LandingPageState extends State<LandingPage> {
         title: new Text("Landing Page"), // Fix
       ), // consider moving this one layer up, to the Landing Page itself
 
-      body: new Center(
-          child: new Text("No reminders yet..")
+      body: new ListView(
+          children:
+          reminders.map((Reminder reminder){
+            return new ReminderItem(reminder);
+          }).toList(),
       ),
 
       floatingActionButton: new FloatingActionButton(
-        //onPressed: ,
-        tooltip: 'Increment',
+        onPressed: addReminder,
+        tooltip: 'Add reminder',
         child: new Icon(Icons.add)
       ),
     );
   }
-}
 
+}
