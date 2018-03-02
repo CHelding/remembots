@@ -1,7 +1,8 @@
 class Reminder {
+  bool isExpanded;
   String name;
   String description;
-  DateTime dueDate;
+  DateTime creationDate;
 
-  Reminder(this.name, this.description, this.dueDate);
+  Reminder(this.isExpanded, this.name, this.description, this.creationDate);
 }
