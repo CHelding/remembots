@@ -39,6 +39,12 @@ class LandingPageState extends State<LandingPage> {
   <StreamSubscription<dynamic>>[];
 
   void addReminder() {
+    for (Reminder reminder in reminders) {
+      reminder.isExpanded = false;
+    }
+
+    setState(() {}); //Ensures redraw of this widget
+
     Navigator.of(context).pushNamed("/CreateReminderPage");
   }
 
@@ -152,13 +158,19 @@ class LandingPageState extends State<LandingPage> {
 
   @override
   void initState() {
+    var result;
+
     super.initState();
     _streamSubscriptions.add(accelerometerEvents.listen((AccelerometerEvent event) {
+
+      result = event.x.abs() + event.y.abs() + event.z.abs();
+
       setState(() {
-        Scaffold.of(context).showSnackBar(new SnackBar(
-            content: new Text('You shook me')
-        ));
+        if(result > 30) {
+          reminders.shuffle();
+        }
       });
+
     }));
   }
 }
