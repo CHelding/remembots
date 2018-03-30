@@ -1,0 +1,55 @@
+{
+  "project_info": {
+    "project_number": "174875635888",
+    "firebase_url": "https://remembot-90f7d.firebaseio.com",
+    "project_id": "remembot-90f7d",
+    "storage_bucket": "remembot-90f7d.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:174875635888:android:e38260ea5f316a34",
+        "android_client_info": {
+          "package_name": "com.yourcompany.remembots"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "174875635888-teo9ddkfl6fum45n5ko0mkge0dsg0cga.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.yourcompany.remembots",
+            "certificate_hash": "2250cd3cbe188ec010060a6299113e0cf7462ce4"
+          }
+        },
+        {
+          "client_id": "174875635888-6k2d09903ppq12rnv211sapg2ngb66gi.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBWOB7NUCpvOVw4_ZN-K-cSDWIfMqoNyJ8"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 2,
+          "other_platform_oauth_client": [
+            {
+              "client_id": "174875635888-6k2d09903ppq12rnv211sapg2ngb66gi.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        },
+        "ads_service": {
+          "status": 2
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
