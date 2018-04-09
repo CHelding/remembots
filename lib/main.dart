@@ -8,12 +8,14 @@ import 'package:google_sign_in/google_sign_in.dart';
 import 'package:firebase_database/firebase_database.dart';
 
 import 'package:remembots/Reminder.dart';
+import 'package:remembots/AppDrawer.dart';
 import 'package:intl/intl.dart';
 import 'package:sensors/sensors.dart';
 import 'dart:async';
 
 final FirebaseAuth auth = FirebaseAuth.instance;
 final GoogleSignIn googleSignIn = new GoogleSignIn();
+final reference = FirebaseDatabase.instance.reference().child('users');
 
 void main() {
   runApp(new RemembotApp());
@@ -41,7 +43,23 @@ Future<Null> ensureLoggedIn() async {
       accessToken: credentials.accessToken,
     );
   }
+  /*REMOVE THIS*/
+  reference.push().set({
+    'userID': googleSignIn.currentUser.id,
+  });
 }
+
+/*FIX THIS!!!*/
+Future<Null> addUserToDB() async {
+
+  if (googleSignIn.currentUser.id == null) {
+    await reference.push().set({
+      'userID': googleSignIn.currentUser.id,
+    });
+  }
+
+}
+
 
 
 
@@ -85,28 +103,20 @@ class LandingPageState extends State<LandingPage> {
   List<StreamSubscription<dynamic>> _streamSubscriptions =
   <StreamSubscription<dynamic>>[];
 
-  /*void sendMessage({ String text }) {
-    ChatMessage message = new ChatMessage(
-      text: text,
-      animationController: new AnimationController(
-        duration: new Duration(milliseconds: 700),
-        vsync: this,
-      ),
-    );
-    setState(() {
-      _messages.insert(0, message);
-    });
-    message.animationController.forward();
-  }*/
-
   void addReminder() {
     for (Reminder reminder in reminders) {
       reminder.isExpanded = false;
     }
 
+    //sendToDB();
+
     setState(() {}); //Ensures redraw of this widget
 
     Navigator.of(context).pushNamed("/CreateReminderPage");
+  }
+
+  void saveReminderToDB() {
+
   }
 
   static void submitReminder(bool isExpanded, Color avatarColor, String name, String description, DateTime creationDate) {
@@ -260,37 +270,6 @@ class LandingPageState extends State<LandingPage> {
       });
 
     }));
-  }
-
-}
-
-
-
-
-class AppDrawer extends StatefulWidget {
-  @override
-  AppDrawerState createState() => new AppDrawerState();
-}
-
-
-
-class AppDrawerState extends State<AppDrawer> {
-  @override
-  Widget build(BuildContext context) {
-    return new Drawer(
-      child: new ListView(
-        children: <Widget>[
-
-          new DrawerHeader(
-            child: new Image.network(googleSignIn.currentUser.photoUrl)
-          ),
-
-          new ListTile(
-            title: new Text("Item 1")
-          )
-        ],
-      )
-    );
   }
 }
 
